@@ -17,7 +17,6 @@ def helper(boxes, index, keys):
     for i in boxes[index]:
         if keys[i] == 0:
             keys[i] = 1
-            print(keys)
             ret = helper(boxes, i, keys)
             ret = check(keys, len(boxes))
     return (ret)
@@ -28,7 +27,6 @@ def canUnlockAll(boxes):
     keys = [0] * len(boxes)
     for i in range(len(boxes)):
         keys[i] = 0
-    print(len(keys))
     ret = 0
     keys[0] = 1
     for i in boxes[0]:
