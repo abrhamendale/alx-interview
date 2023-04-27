@@ -31,7 +31,7 @@ def canUnlockAll(boxes):
     if len(boxes):
         keys[0] = 1
     else:
-        return (False)
+        return (True)
     for i in boxes[0]:
         if i < len(boxes):
             if keys[i] == 0:
