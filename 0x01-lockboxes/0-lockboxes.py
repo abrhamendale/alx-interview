@@ -28,7 +28,10 @@ def canUnlockAll(boxes):
     for i in range(len(boxes)):
         keys[i] = 0
     ret = 0
-    keys[0] = 1
+    if len(boxes):
+        keys[0] = 1
+    else:
+        return True
     for i in boxes[0]:
         if i < len(boxes):
             if keys[i] == 0:
