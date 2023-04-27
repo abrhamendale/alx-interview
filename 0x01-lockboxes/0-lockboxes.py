@@ -14,10 +14,11 @@ def helper(boxes, index, keys):
     """Helper function"""
     ret = 0
     for i in boxes[index]:
-        if keys[i] == 0:
-            keys[i] = 1
-            ret = helper(boxes, i, keys)
-            ret = check(keys, len(boxes))
+        if i < len(boxes):
+            if keys[i] == 0:
+                keys[i] = 1
+                ret = helper(boxes, i, keys)
+                ret = check(keys, len(boxes))
     return (ret)
 
 
@@ -29,10 +30,11 @@ def canUnlockAll(boxes):
     ret = 0
     keys[0] = 1
     for i in boxes[0]:
-        if keys[i] == 0:
-            keys[i] = 1
-            ret = helper(boxes, i, keys)
-            ret = check(keys, len(boxes))
+        if i < len(boxes):
+            if keys[i] == 0:
+                keys[i] = 1
+                ret = helper(boxes, i, keys)
+                ret = check(keys, len(boxes))
     if ret == 1:
         return (True)
     else:
