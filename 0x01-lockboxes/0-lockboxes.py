@@ -38,7 +38,7 @@ def canUnlockAll(boxes):
                 keys[i] = 1
                 ret = helper(boxes, i, keys)
                 ret = check(keys, len(boxes))
-    if ret == 1:
+    if ret == 1 or len(boxes) == 1:
         return (True)
     else:
         return (False)
