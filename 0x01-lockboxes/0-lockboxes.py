@@ -4,7 +4,6 @@
 
 def check(keys, l):
     """Checks if all the box indexes have been obtained."""
-    print(keys)
     for i in range(l):
         if keys[i] != 1:
             return 0
