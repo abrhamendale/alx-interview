@@ -2,7 +2,7 @@
 """Pascal's triangle"""
 
 
-def pascal_triangle(n = 5):
+def pascal_triangle(n=5):
     """Returns pascals triangle in a list of lists format."""
     tr = []
     for i in range(n):
