@@ -51,8 +51,6 @@ def minOperations(n):
     num = 2
     h = 2
 
-    print("cp", cp, "cpv", cpv, "num", num, "h", h, "check", check)
-
     ret1 = helper(0, cpv, check, num, h, n)
     if cpv < h:
         ret2 = helper(1, cpv, check, num, h, n)
