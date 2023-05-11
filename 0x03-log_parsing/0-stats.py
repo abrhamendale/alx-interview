@@ -5,7 +5,7 @@ Log parsing
 
 
 import sys
-from time import sleep
+from datetime import datetime
 import ipaddress
 import re
 
@@ -35,7 +35,6 @@ for lin in sys.stdin:
     """
     try:
         ipaddress.IPv4Network(ipaddr)
-        print(True)
         pass
     except ValueError:
         continue
@@ -47,8 +46,13 @@ for lin in sys.stdin:
         if line[i] == ']':
             break
         dat = dat + line[i]
-    x = re.search(r'\d{4}-\d?\d-\d?\d (?:2[0-3]|[01]?
-                   [0-9]):[0-5]?[0-9]:[0-5]?[0-9]', dat)
+    try:
+        res = bool(datetime.strptime(dat, "YYYY-MM-DD hh:mm:ss. ffffff"))
+    except ValueError:
+        res = False
+    """
+    x = re.search("r'\d{4}-\d?\d-\d?\d (?:2[0-3]|[01]?[0-9]):[0-5]?[0-9]:[0-5]?[0-9]'", dat)
+    """
     """
     DATE
     """
