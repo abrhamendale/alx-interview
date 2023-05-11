@@ -13,11 +13,11 @@ ln = 0
 t_size = 0
 st_code = [200, 301, 400, 401, 403, 404, 405, 500]
 st_count = [0, 0, 0, 0, 0, 0, 0, 0]
-for lin in sys.stdin:
-    if 'Exit' == lin.rstrip():
+for line in sys.stdin:
+    if 'Exit' == line.rstrip():
         break
     ln = ln + 1
-    line = str(lin)
+    lin = str(line)
     c = 0
     ipaddr = ""
     dat = ""
@@ -25,11 +25,11 @@ for lin in sys.stdin:
     st = ""
     fsize = ""
     valid = 1
-    for i in range(0, len(line)):
+    for i in range(0, len(lin)):
         c = c + 1
         if line[i] == ' ':
             break
-        ipaddr = ipaddr + line[i]
+        ipaddr = ipaddr + lin[i]
     """
     x = re.search("^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$", ipaddr)
     """
@@ -41,11 +41,11 @@ for lin in sys.stdin:
     """
     IP
     """
-    for i in range(c + 3, len(line)):
+    for i in range(c + 3, len(lin)):
         c = c + 1
-        if line[i] == ']':
+        if lin[i] == ']':
             break
-        dat = dat + line[i]
+        dat = dat + lin[i]
     try:
         res = bool(datetime.strptime(dat, "YYYY-MM-DD hh:mm:ss. ffffff"))
     except ValueError:
@@ -56,22 +56,29 @@ for lin in sys.stdin:
     """
     DATE
     """
-    for i in range(c + 5, len(line)):
+    for i in range(c + 5, len(lin)):
         c = c + 1
-        if line[i] == '\"':
+        if lin[i] == '\"':
             break
-        htm = htm + line[i]
-    if line[c] != ' ' or htm != "GET /projects/260 HTTP/1.1":
+        htm = htm + lin[i]
+    if lin[c + 5] != ' ' or htm != "GET /projects/260 HTTP/1.1":
         valid = 0
     """
     HTML
     """
     c = c + 6
-    st = st + line[c:c + 3]
-    if line[c + 4] != ' ':
+    st = st + lin[c:c + 3]
+    if lin[c + 3] != ' ':
         valid = 0
-    if int(st) not in st_code:
+    if int(st):
+        pass
+    else:
+        continue
+    """
+    if st not in st_code:
         valid = 0
+    print(valid)
+    """
     """
     Status code
     """
@@ -79,15 +86,15 @@ for lin in sys.stdin:
         if int(st) == st_code[i]:
             st_count[i] = st_count[i] + 1
     c = c + 4
-    for i in range(c, len(line)):
+    for i in range(c, len(lin)):
         c = c + 1
-        fsize = fsize + line[i]
+        fsize = fsize + lin[i]
     """
     File size
     """
     t_size = t_size + int(fsize)
 
-    if ln % 10 == 0:
+    if ln % 10 == 0 and valid == 1:
         print("File size:", t_size)
         for i in range(0, 8):
             if st_count[i]:
