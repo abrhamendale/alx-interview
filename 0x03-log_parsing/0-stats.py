@@ -25,18 +25,20 @@ for lin in sys.stdin:
     st = ""
     fsize = ""
     valid = 1
-    #print(line)
     for i in range(0, len(line)):
         c = c + 1
         if line[i] == ' ':
             break
         ipaddr = ipaddr + line[i]
+    """
     x = re.search("^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$", ipaddr)
-    if x:
+    """
+    try:
+        ipaddress.IPv4Network(ipaddr)
+        print(True)
         pass
-    else:
-        valid = 0
-    #print("IP:",ipaddr)
+    except ValueError:
+        continue
     """
     IP
     """
@@ -45,8 +47,8 @@ for lin in sys.stdin:
         if line[i] == ']':
             break
         dat = dat + line[i]
-    x = re.search("r'\d{4}-\d?\d-\d?\d (?:2[0-3]|[01]?[0-9]):[0-5]?[0-9]:[0-5]?[0-9]'", dat)
-    #print("Date:", dat)
+    x = re.search(r'\d{4}-\d?\d-\d?\d (?:2[0-3]|[01]?
+                   [0-9]):[0-5]?[0-9]:[0-5]?[0-9]', dat)
     """
     DATE
     """
@@ -55,9 +57,8 @@ for lin in sys.stdin:
         if line[i] == '\"':
             break
         htm = htm + line[i]
-    if line[c] != ' ':
+    if line[c] != ' ' or htm != "GET /projects/260 HTTP/1.1":
         valid = 0
-    #print("htm:", htm)
     """
     HTML
     """
@@ -67,19 +68,16 @@ for lin in sys.stdin:
         valid = 0
     if int(st) not in st_code:
         valid = 0
-    #print("st:", st)
     """
     Status code
     """
     for i in range(len(st_code)):
         if int(st) == st_code[i]:
             st_count[i] = st_count[i] + 1
-    #print("Status check:", st_count)
     c = c + 4
     for i in range(c, len(line)):
         c = c + 1
         fsize = fsize + line[i]
-    #print("size:", fsize)
     """
     File size
     """
@@ -90,14 +88,8 @@ for lin in sys.stdin:
         for i in range(0, 8):
             if st_count[i]:
                 print(str(st_code[i]) + ":", st_count[i])
-                """
-        print("200:", st_count[0])
-        print("401:", st_count[1])
-        print("403:", st_count[2])
-        print("404:", st_count[3])
-        print("405:", st_count[4])
-        print("500:", st_count[5])
-        """
-    #/d{1,3}/./d{1,3}/./d{1,3}/./d{1,3}/w/-/w/[]
-    #/d{1,4}/-/d{1,2}/-/d{1,2}/t/d{1,2}/:/d{1,2}/:/d{1,2}/./d{1,6}
-    #[2345][0][01345]
+    """
+    /d{1,3}/./d{1,3}/./d{1,3}/./d{1,3}/w/-/w/[]
+    /d{1,4}/-/d{1,2}/-/d{1,2}/t/d{1,2}/:/d{1,2}/:/d{1,2}/./d{1,6}
+    [2345][0][01345]
+    """
