@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 Log parsing
 """
@@ -87,12 +87,17 @@ for lin in sys.stdin:
 
     if ln % 10 == 0:
         print("File size:", t_size)
+        for i in range(0, 8):
+            if st_count[i]:
+                print(str(st_code[i]) + ":", st_count[i])
+                """
         print("200:", st_count[0])
         print("401:", st_count[1])
         print("403:", st_count[2])
         print("404:", st_count[3])
         print("405:", st_count[4])
         print("500:", st_count[5])
+        """
     #/d{1,3}/./d{1,3}/./d{1,3}/./d{1,3}/w/-/w/[]
     #/d{1,4}/-/d{1,2}/-/d{1,2}/t/d{1,2}/:/d{1,2}/:/d{1,2}/./d{1,6}
     #[2345][0][01345]
