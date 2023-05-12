@@ -37,7 +37,7 @@ for line in sys.stdin:
         ipaddress.IPv4Network(ipaddr)
         pass
     except ValueError:
-        continue
+        pass
     """
     IP
     """
