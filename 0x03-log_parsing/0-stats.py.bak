@@ -30,6 +30,9 @@ for line in sys.stdin:
         if line[i] == ' ':
             break
         ipaddr = ipaddr + lin[i]
+    """
+    x = re.search("^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$", ipaddr)
+    """
     try:
         ipaddress.IPv4Network(ipaddr)
         pass
@@ -50,6 +53,9 @@ for line in sys.stdin:
     except ValueError:
         res = False
         continue
+    """
+    x = re.search("r'\d{4}-\d?\d-\d?\d (?:2[0-3]|[01]?[0-9]):[0-5]?[0-9]:[0-5]?[0-9]'", dat)
+    """
     """
     DATE
     """
