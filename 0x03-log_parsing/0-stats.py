@@ -37,7 +37,7 @@ for line in sys.stdin:
         ipaddress.IPv4Network(ipaddr)
         pass
     except ValueError:
-        pass
+        continue
     """
     IP
     """
@@ -46,10 +46,13 @@ for line in sys.stdin:
         if lin[i] == ']':
             break
         dat = dat + lin[i]
+    d_format = '%Y-%m-%d %H:%M:%S.%f'
     try:
-        res = bool(datetime.strptime(dat, "YYYY-MM-DD hh:mm:ss. ffffff"))
+        res = bool(datetime.strptime(dat, d_format))
+        pass
     except ValueError:
         res = False
+        continue
     """
     x = re.search("r'\d{4}-\d?\d-\d?\d (?:2[0-3]|[01]?[0-9]):[0-5]?[0-9]:[0-5]?[0-9]'", dat)
     """
