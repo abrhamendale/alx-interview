@@ -40,17 +40,21 @@ def logger(pr):
             valid = 1
             for i in range(0, len(lin)):
                 c = c + 1
-                if line[i] == ' ':
+                if line[i] == ' ' or line[i] == '-':
                     break
                 ipaddr = ipaddr + lin[i]
             try:
                 ipaddress.IPv4Network(ipaddr)
                 pass
             except ValueError:
-                continue
+                valid = 0
+                pass
             """
             IP
             """
+            if c < len(line):
+                if line[c] == '[':
+                    c = c - 2
             for i in range(c + 3, len(lin)):
                 c = c + 1
                 if lin[i] == ']':
@@ -62,6 +66,7 @@ def logger(pr):
                 pass
             except ValueError:
                 res = False
+                valid = 0
                 continue
             """
             DATE
@@ -80,10 +85,17 @@ def logger(pr):
             st = st + lin[c:c + 3]
             if lin[c + 3] != ' ':
                 valid = 0
-            if int(st):
+            """
+            Changed
+            """
+            st_invalid = 0
+            try:
+                int(st)
                 pass
-            else:
-                continue
+            except ValueError:
+                valid = 0
+                st_invalid = 1
+                pass
             """
             if st not in st_code:
                 valid = 0
@@ -93,9 +105,14 @@ def logger(pr):
             Status code
             """
             for i in range(len(st_code)):
-                if int(st) == st_code[i]:
-                    st_count[i] = st_count[i] + 1
+                if st_invalid == 0:
+                    if int(st) == st_code[i]:
+                        st_count[i] = st_count[i] + 1
             c = c + 4
+            if line[c - 1] != ' ':
+                for i in range(c, len(line)):
+                    if line[c] != ' ':
+                        c = c + 1
             for i in range(c, len(lin)):
                 c = c + 1
                 fsize = fsize + lin[i]
