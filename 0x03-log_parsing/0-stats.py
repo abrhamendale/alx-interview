@@ -17,7 +17,6 @@ st_count = [0, 0, 0, 0, 0, 0, 0, 0]
 
 
 def logger(pr):
-    print("Fn logger")
     ln = 0
     global t_size
     t_size = 0
