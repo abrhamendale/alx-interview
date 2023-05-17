@@ -6,6 +6,12 @@ UTF-8 validation module
 
 def validUTF8(data):
     """Checks if data is a valid utf-8 encoding"""
+    if data is None:
+        return (False)
+    try:
+        int(data[0])
+    except ValueError:
+        return (False)
     data = iter(data)
     for msbs in data:
         msb_ones = 8
