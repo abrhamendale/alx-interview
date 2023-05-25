@@ -23,7 +23,7 @@ def q_checker(i, j, N, chess):
     return False
 
 
-def Nqueens(n, chess):
+def Nqueens(i_index, j_index, n, chess):
     """
     Calculates solutions for Nqueen.
     """
@@ -32,9 +32,9 @@ def Nqueens(n, chess):
     for i in range(0, N):
         for j in range(0, N):
             if (q_checker(i, j, N, chess) is False) and chess[i][j] != 1:
-                chess[i][j] = 1
+                chess[i + i_index][j + j_index] = 1
                 queens.append([i, j])
-                if Nqueens(n - 1, chess) is True:
+                if Nqueens(0, 0, n - 1, chess) is True:
                     return True
                 queens.pop()
                 chess[i][j] = 0
@@ -43,6 +43,9 @@ def Nqueens(n, chess):
 
 if __name__ == '__main__':
     """Run main function."""
+    if len(sys.argv) > 2 or len(sys.argv) < 2:
+        print("Usage: nqueens N")
+        exit(1)
     if not isinstance(N, int):
         print("N must be a number")
         exit(1)
@@ -50,5 +53,7 @@ if __name__ == '__main__':
         print("N must be at least 4")
         exit(1)
     chess = [[0]*N for _ in range(N)]
-    Nqueens(N, chess)
+    for i in range(0, N):
+        for j in range(0, N):
+            Nqueens(i, j, N, chess)
     print(queens)
