@@ -12,9 +12,8 @@ if len(sys.argv) > 2 or len(sys.argv) < 2:
     exit(1)
 try:
     int(sys.argv[1])
-except ValueError:
+except:
     print("N must be a number")
-    exit(1)
 """
 if not isinstance(sys.argv[1], int):
     print("N must be a number")
@@ -58,7 +57,7 @@ def Nqueens(i_index, j_index, n, chess):
     for i in range(i_index, N):
         for j in range(j_index, N):
             if (q_checker(i, j, N, chess) is False) and chess[i][j] != 1:
-                if True:
+                if True:#overlap_checker(i, j):
                     chess[i][j] = 1
                     queens.append([i, j])
                     if Nqueens(0, 0, n - 1, chess) is True:
@@ -74,7 +73,9 @@ if __name__ == '__main__':
     append = 0
     for i in range(0, N):
         for j in range(0, N):
-            if Nqueens(i, j, N, chess):
+            Nqueens(i, j, N, chess)
+            #print(queens)
+            if queens:
                 if not queens_main:
                     queens_main.append(queens)
                 for k in queens_main:
@@ -90,8 +91,5 @@ if __name__ == '__main__':
                     queens_main.append(queens)
                 queens = []
             chess = [[0]*N for _ in range(N)]
-    if N == 5:
-        q = [[0, 4], [1, 2], [2, 0], [3, 3], [4, 1]]
-        queens_main.append(q)
     for i in queens_main:
         print(i)
