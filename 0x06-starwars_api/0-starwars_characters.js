@@ -3,7 +3,7 @@
 
 const request = require('request');
 
-const url = 'https://swapi.dev/api/films/' + process.argv[2];
+const url = 'https://swapi-api.alx-tools.com/api/films/' + process.argv[2];
 
 request(url, function (error, response, body) {
   if (error == null) {
@@ -19,7 +19,7 @@ request(url, function (error, response, body) {
 function FetchChar (j, names) {
   if (j < names.length) {
     request(names[j], function (error, response, body) {
-      if (error == null) {
+      if (error === null) {
         const data = JSON.parse(body);
         console.log(data.name);
       } else {
