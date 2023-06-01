@@ -15,7 +15,7 @@ request(option_a, function(err, res, body) {
   }
 });
 function fetch_char(index, ch, len){
-  for(let i = 0, i < len, i++) {
+  for(let i = 0; i < len; i++) {
     request(ch[index], function(err, res, body) { 
       let data = JSON.parse(body);
       console.log(data.name);
