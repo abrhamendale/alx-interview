@@ -21,7 +21,6 @@ function fetch_char(j, names){
     request(names[j], function(err, res, body) { 
       if (err == null) {
         const data = JSON.parse(body);
-	//char_list.push(data.name);
         console.log(data.name);
       }
       else {
