@@ -3,22 +3,29 @@
 
 const request = require('request');
 
-var option_a = {
-  url: "https://swapi.dev/api/films/" + process.argv[2],
-  method: 'GET'
-}
-request(option_a, function(err, res, body) {
-  let results = JSON.parse(body);
-  let nm = results.name;
-  if (nm) {
-    fetch_char(0, nm, nm.length);
+url = "https://swapi.dev/api/films/" + process.argv[2],
+
+request(url, function(err, res, body) {
+  if (error == null) {
+    let results = JSON.parse(body);
+    let names = results.name;
+    if (names) {
+      fetch_char(names);
+    }
+  } else {
+    console.log(error);
   }
 });
-function fetch_char(index, ch, len){
-  for(let i = 0; i < len; i++) {
-    request(ch[index], function(err, res, body) { 
-      let data = JSON.parse(body);
-      console.log(data.name);
+function fetch_char(names){
+  for(let i = 0; i < names.length; i++) {
+    request(names[i], function(err, res, body) { 
+      if (error == null) {
+        let data = JSON.parse(body);
+        console.log(data.name);
+      }
+      else {
+        console.log(error)
+      }
     });
   }
 }
