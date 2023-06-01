@@ -33,7 +33,4 @@ function fetch_char(names){
       fetch_char(names);
     });
   }
-  //console.log(char_list)
-  //for (let j = 0; j < char_list.length; j++) {
-  //  console.log(char_list[j]);
 }
