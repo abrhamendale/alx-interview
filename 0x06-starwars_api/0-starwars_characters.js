@@ -5,10 +5,10 @@ const request = require('request');
 
 url = "https://swapi.dev/api/films/" + process.argv[2];
 
-request(url, function(err, res, body) {
+request(url, function(error, response, body) {
   if (error == null) {
     let results = JSON.parse(body);
-    let names = results.name;
+    let names = results.characters;
     if (names) {
       fetch_char(names);
     }
@@ -16,16 +16,24 @@ request(url, function(err, res, body) {
     console.log(error);
   }
 });
+var j = 0
 function fetch_char(names){
-  for(let i = 0; i < names.length; i++) {
-    request(names[i], function(err, res, body) { 
-      if (error == null) {
+  var char_list = [];
+  if (j < names.length) {
+    request(names[j], function(err, res, body) { 
+      if (err == null) {
         const data = JSON.parse(body);
+	char_list.push(data.name);
         console.log(data.name);
       }
       else {
         console.log(error);
       }
+      j++;
+      fetch_char(names);
     });
   }
+  //console.log(char_list)
+  //for (let j = 0; j < char_list.length; j++) {
+  //  console.log(char_list[j]);
 }
