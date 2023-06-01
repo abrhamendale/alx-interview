@@ -10,27 +10,25 @@ request(url, function(error, response, body) {
     let results = JSON.parse(body);
     let names = results.characters;
     if (names) {
-      fetch_char(names);
+      fetch_char(0, names);
     }
   } else {
     console.log(error);
   }
 });
-var j = 0
-function fetch_char(names){
-  var char_list = [];
+function fetch_char(j, names){
   if (j < names.length) {
     request(names[j], function(err, res, body) { 
       if (err == null) {
         const data = JSON.parse(body);
-	char_list.push(data.name);
+	//char_list.push(data.name);
         console.log(data.name);
       }
       else {
         console.log(error);
       }
       j++;
-      fetch_char(names);
+      fetch_char(j, names);
     });
   }
 }
