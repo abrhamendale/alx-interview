@@ -1,33 +1,32 @@
 #!/usr/bin/node
-//fetches Star wars characters of a movie
+// fetches Star wars characters of a movie
 
 const request = require('request');
 
-url = "https://swapi.dev/api/films/" + process.argv[2];
+const url = 'https://swapi.dev/api/films/' + process.argv[2];
 
-request(url, function(error, response, body) {
+request(url, function (error, response, body) {
   if (error == null) {
-    let results = JSON.parse(body);
-    let names = results.characters;
+    const results = JSON.parse(body);
+    const names = results.characters;
     if (names) {
-      fetch_char(0, names);
+      FetchChar(0, names);
     }
   } else {
     console.log(error);
   }
 });
-function fetch_char(j, names){
+function FetchChar (j, names) {
   if (j < names.length) {
-    request(names[j], function(err, res, body) { 
-      if (err == null) {
+    request(names[j], function (error, response, body) {
+      if (error == null) {
         const data = JSON.parse(body);
         console.log(data.name);
-      }
-      else {
+      } else {
         console.log(error);
       }
       j++;
-      fetch_char(j, names);
+      FetchChar(j, names);
     });
   }
 }
