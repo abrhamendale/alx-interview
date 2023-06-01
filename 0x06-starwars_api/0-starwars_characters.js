@@ -3,7 +3,7 @@
 
 const request = require('request');
 
-url = "https://swapi.dev/api/films/" + process.argv[2],
+url = "https://swapi.dev/api/films/" + process.argv[2]
 
 request(url, function(err, res, body) {
   if (error == null) {
@@ -24,7 +24,7 @@ function fetch_char(names){
         console.log(data.name);
       }
       else {
-        console.log(error)
+        console.log(error);
       }
     });
   }
