@@ -3,6 +3,10 @@
 Make change module.
 """
 
+
+import timeit
+
+
 opt_arr = []
 
 
@@ -50,7 +54,10 @@ def makeChange(coins, total):
         opt_arr.append(max(coins))
     ind = 0
     fail_sm = sum(opt_arr)
+    t_0 = timeit.default_timer()
     change_helper(sorted(coins), val_arr, opt_arr, ind, total)
+    t_1 = timeit.default_timer()
+    print(round((t_1 - t_0) * 10 ** 6, 3))
     if sum(opt_arr) == fail_sm:
         return -1
     return sum(opt_arr)

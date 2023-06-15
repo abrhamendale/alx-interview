@@ -26,8 +26,9 @@ def change_helper(arr, val_arr, total, ind, tot):
     set of changes equalling a total.
     """
     max_weight = int(tot / arr[ind])
+    #print(max_weight, arr[ind])
     for i in range(max_weight, -1, -1):
-
+        #print(val_arr)
         itot = tot - i * arr[ind]
         val_arr[ind] = i
         if ind < len(arr) - 1:
@@ -53,7 +54,6 @@ def change_helper(arr, val_arr, total, ind, tot):
         val_arr[ind] = val_arr[ind] + 1
 """
 
-
 def makeChange(coins, total):
     """
     Calculates the smallest sets of
@@ -69,7 +69,7 @@ def makeChange(coins, total):
     ind = 0
     fail_sm = sum(opt_arr)
     t_0 = timeit.default_timer()
-    if change_helper(sorted(coins, reverse=True), val_arr, total, ind, total):
+    if change_helper(sorted(coins, reverse = True), val_arr, total, ind, total):
         t_1 = timeit.default_timer()
         print(round((t_1 - t_0) * 10 ** 6, 3))
         return sum(val_arr)
