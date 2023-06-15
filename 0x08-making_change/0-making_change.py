@@ -71,7 +71,8 @@ def makeChange(coins, total):
     t_0 = timeit.default_timer()
     if change_helper(sorted(coins, reverse=True), val_arr, total, ind, total):
         t_1 = timeit.default_timer()
-        print(round((t_1 - t_0) * 10 ** 6, 3))
+        """print(round((t_1 - t_0) * 10 ** 6, 3))
+        """
         return sum(val_arr)
     else:
         return -1
