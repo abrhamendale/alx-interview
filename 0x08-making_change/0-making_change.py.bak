@@ -51,6 +51,6 @@ def makeChange(coins, total):
     ind = 0
     fail_sm = sum(opt_arr)
     change_helper(sorted(coins), val_arr, opt_arr, ind, total)
-    if multiplier(opt_arr, coins) != total:
+    if sum(opt_arr) == fail_sm:
         return -1
     return sum(opt_arr)
