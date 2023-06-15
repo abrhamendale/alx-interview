@@ -36,19 +36,21 @@ def change_helper(arr, val_arr, opt_arr, ind, tot):
         val_arr[ind] = val_arr[ind] + 1
 
 
-def makeChange(arr, tot):
+def makeChange(coins, total):
     """
     Calculates the smallest sets of
     changes that equals a total.
     """
+    if total <= 0:
+        return 0
     val_arr = []
     opt_arr = []
-    for i in range(len(arr)):
+    for i in range(len(coins)):
         val_arr.append(0)
-        opt_arr.append(max(arr))
+        opt_arr.append(max(coins))
     ind = 0
     fail_sm = sum(opt_arr)
-    change_helper(arr, val_arr, opt_arr, ind, tot)
+    change_helper(coins, val_arr, opt_arr, ind, total)
     if sum(opt_arr) == fail_sm:
         return -1
     return sum(opt_arr)
