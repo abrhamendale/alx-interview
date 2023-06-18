@@ -37,18 +37,30 @@ def change_helper(arr, val_arr, total, ind, tot):
             return True
 
 
+"""
+    while multiplier(val_arr, arr) <= tot:
+        if ind == len(val_arr):
+            break
+        if sum(val_arr) <= sum(opt_arr) and multiplier(val_arr, arr) == tot:
+            for i in range(len(arr)):
+                opt_arr[i] = val_arr[i]
+        if ind < len(val_arr):
+            ind = ind + 1
+            change_helper(arr, val_arr, opt_arr, ind, tot)
+            if ind < len(val_arr):
+                val_arr[ind] = 0
+            ind = ind - 1
+        val_arr[ind] = val_arr[ind] + 1
+"""
+
+
 def makeChange(coins, total):
     """
     Calculates the smallest sets of
     changes that equals a total.
     """
-    if not coins:
-        return -1
     if total <= 0:
         return 0
-    if coins == [3, 6, 9] and total == 1278652:
-        return -1
-
     val_arr = []
     opt_arr = []
     for i in range(len(coins)):
