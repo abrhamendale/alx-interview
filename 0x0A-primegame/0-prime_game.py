@@ -24,6 +24,7 @@ def check_multiple(mn, mp, bp):
 def helper(player, mn, mx):
     """
     A helper function.
+    print(player, maria_primes, ben_primes, mn, mx)
     """
     if mn >= mx:
         if player == 'Maria':
@@ -52,6 +53,8 @@ def isWinner(x, nums):
             m_count = m_count + 1
         if winner == 'Ben':
             b_count = b_count + 1
+        maria_primes.clear()
+        ben_primes.clear()
     if m_count > b_count:
         return 'Maria'
     if b_count > m_count:
