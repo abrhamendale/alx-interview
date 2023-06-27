@@ -55,10 +55,12 @@ def isWinner(x, nums):
     b_count = 0
     winner = ''
     for i in range(x):
+        looper = i
         if i >= len(nums):
-            continue
-        if nums[i] != 1:
-            winner = helper('Maria', 2, nums[i])
+            looper = looper - len(nums)
+        print(nums[looper])
+        if nums[looper] != 1:
+            winner = helper('Maria', 2, nums[looper])
         else:
             winner = 'Ben'
         if winner == 'Maria':
