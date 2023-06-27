@@ -51,12 +51,12 @@ def isWinner(x, nums):
     """
     if x == 0 or nums is None:
         return None
-    if x > len(nums):
-        return None
     m_count = 0
     b_count = 0
     winner = ''
     for i in range(x):
+        if i >= len(nums):
+            continue
         if nums[i] != 1:
             winner = helper('Maria', 2, nums[i])
         else:
