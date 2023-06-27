@@ -58,7 +58,6 @@ def isWinner(x, nums):
         looper = i
         if i >= len(nums):
             looper = looper - len(nums)
-        print(nums[looper])
         if nums[looper] != 1:
             winner = helper('Maria', 2, nums[looper])
         else:
