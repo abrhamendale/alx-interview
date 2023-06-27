@@ -45,6 +45,10 @@ def isWinner(x, nums):
     """
     Calculates the most winner of the prime game.
     """
+    if x == 0 or nums is None:
+        return None
+    if x > len(nums):
+        return None
     m_count = 0
     b_count = 0
     for i in range(x):
